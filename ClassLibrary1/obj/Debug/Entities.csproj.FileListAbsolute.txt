@@ -1,0 +1,6 @@
+C:\Users\aelia\Desktop\BLogic\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\aelia\Desktop\BLogic\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\aelia\Desktop\BLogic\ClassLibrary1\obj\Debug\Entities.csprojAssemblyReference.cache
+C:\Users\aelia\Desktop\BLogic\ClassLibrary1\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+C:\Users\aelia\Desktop\BLogic\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\aelia\Desktop\BLogic\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

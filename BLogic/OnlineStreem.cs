@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Entities;
 namespace BLogic
 {
     internal class OnlineStreem
@@ -26,6 +26,7 @@ namespace BLogic
                     var response = await client.PostAsync(url, content);
                     if (response != null)
                     {
+                        log.LogMessege("response return", false);
                         var jsonString = await response.Content.ReadAsStringAsync();
                         try
                         {

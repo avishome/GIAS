@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Entities;
 namespace BLogic
 {
     internal class DataManager
     {
         private Log log;
-        private List<Cluster> list = new List<Cluster>();
+
+            private List<Cluster> list = new List<Cluster>();
 
         public DataManager(Log log)
         {
@@ -17,7 +18,7 @@ namespace BLogic
 
         public async Task InputFromAsync(string url)
         {
-            LogEvent task = log.LogMessege("connect to remote service",true);
+            LogEvent task = log.LogMessege("connect to remote service "+ url,true);
 
             OnlineStreem Streem = new OnlineStreem(url, task);
             await Streem.PostCallAPI();
@@ -38,12 +39,23 @@ namespace BLogic
                 foreach (Report r in c)
                     if (r.needAttr())
                     {
-                        r.FindLocAsync(s, token, task);
+                        FindLocAsync(r,s, token, task);
 
                         break;
                     }
                 break;
             }
+        }
+
+        private async System.Threading.Tasks.Task<string> FindLocAsync(Report r, string s, string token, LogEvent task)
+        {
+            string request = string.Format(s, r.p1, r.p2, token);
+            task.LogMessege("sent request to: " + request, true);
+            OnlineStreem Streem = new OnlineStreem(request, task);
+            await Streem.PostCallAPI();
+            r.SetLoc(Streem.getLoc());
+            task.LogMessege(r.loc, false);
+            return r.loc;
         }
 
         private void Catalog(Cluster reports)

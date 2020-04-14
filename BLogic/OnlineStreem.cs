@@ -88,7 +88,7 @@ namespace BLogic
         }
 
         public dynamic getLocData(int index) {
-            if (data.Count > index && index>0) return data[index];
+            if (!(data is null) && data.Count > index && index>0) return data[index];
             return null;
         }
 

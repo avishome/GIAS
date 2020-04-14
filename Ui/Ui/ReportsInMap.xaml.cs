@@ -35,6 +35,8 @@ namespace Ui
             get { return _DataContext2; } 
             set {
                 _DataContext2 = value;
+                if(value is List<Report> && value.Count>0)
+                    myMap.Center = new Location(double.Parse(value[0].p1), double.Parse(value[0].p2));
                 foreach (var x in value)
                 {
                     myMap.Children.Add(new Pushpin() { Location = new Location(double.Parse(x.p1), double.Parse(x.p2)) });

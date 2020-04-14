@@ -6,9 +6,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using LogClass;
+using System.Collections.Generic;
+
 namespace BLogic
 {
-    internal class OnlineStreem
+    public class OnlineStreem
     {
         private string url;
         LogEvent log;
@@ -63,9 +66,30 @@ namespace BLogic
             return null;
         }
 
-        internal string getLoc()
+        internal Adrress getLoc()
         {
-            return data1["display_name"].ToString();
+            return new Adrress() { city= data1["address"]["county"].ToString(), country = data1["address"]["country"].ToString(),
+            country_code = data1["address"]["country_code"].ToString(), display_name= data1["display_name"].ToString(),
+            neighbourhood = data1["address"]["suburb"].ToString(), road = data1["address"]["road"].ToString(),
+            state = data1["address"]["state"].ToString(), house_number = data1["address"]["cafe"].ToString(),
+            county = data1["address"]["region"].ToString()
+            };
+        }
+
+        public List<string> getAddress() {
+             
+            var L = new List<string>();
+            if (data is null) return L;
+            foreach (var l in data)
+            {
+                L.Add(l["display_name"].ToString());
+            }
+            return L;
+        }
+
+        public dynamic getLocData(int index) {
+            if (data.Count > index && index>0) return data[index];
+            return null;
         }
 
         public OnlineStreem(string v, LogEvent log)

@@ -4,10 +4,10 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using LogClass;
 namespace BLogic
 {
-    class GlobFuncs
+    public class GlobFuncs
     {
         public static string getConfig(string key)
         {

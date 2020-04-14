@@ -3,20 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entities;
+using LogClass;
+using Dl;
+using System.Linq;
+
 namespace BLogic
 {
-    internal class DataManager
+    public class DataManager
     {
         private Log log;
 
-            private List<Cluster> list = new List<Cluster>();
+        private List<Cluster> list = new List<Cluster>();
+        public List<Cluster> List { get { return list; } set { } }
+        public List<Report> Point { get {
+                List<Report> temp = new List<Report>();
+                foreach (Cluster i in list) 
+                    if(!(i.FirstOrDefault() is null && i.size()<2))temp.Add(i.FirstOrDefault()); 
+                    else if(!(i.AdrressByAlgo is null)) temp.Add(i.AdrressByAlgo);
+                return temp;
+            } }
 
         public DataManager(Log log)
         {
             this.log = log;
         }
 
-        public async Task InputFromAsync(string url)
+        public async Task InputFromUrl(string url)
         {
             LogEvent task = log.LogMessege("connect to remote service "+ url,true);
 
@@ -27,7 +39,7 @@ namespace BLogic
 
             Catalog(Streem.toReportList());
 
-            log.LogMessege("there are: " + list.Count + " Clusters", task, false);
+            log.LogMessege("there are: " + list.Count + " Clusters | Done", task, false);
             
          }
 
@@ -41,7 +53,7 @@ namespace BLogic
                     {
                         FindLocAsync(r,s, token, task);
 
-                        break;
+                        
                     }
                 break;
             }
@@ -53,9 +65,9 @@ namespace BLogic
             task.LogMessege("sent request to: " + request, true);
             OnlineStreem Streem = new OnlineStreem(request, task);
             await Streem.PostCallAPI();
-            r.SetLoc(Streem.getLoc());
-            task.LogMessege(r.loc, false);
-            return r.loc;
+            r.loc = Streem.getLoc();
+            task.LogMessege(r.loc.display_name, false);
+            return r.loc.display_name;
         }
 
         private void Catalog(Cluster reports)
@@ -65,6 +77,26 @@ namespace BLogic
                 if (!findCluster(report))
                     createNewCluster(report);
             }
+        }
+
+        public void CalcAvgLoc(Cluster reports)
+        {
+            double x = 0;
+            double y = 0;
+            int num = reports.size();
+            foreach (Report report in reports)
+            {
+                try
+                {
+                    double Getx = Double.Parse(report.p1);
+                    double GetY = Double.Parse(report.p2);
+                    x += Getx;
+                    y += GetY;
+                }
+                catch { }
+                
+            }
+            reports.SetAdrressByAlgo(x/num, y/num);
         }
 
         private void createNewCluster(Report report)
@@ -78,10 +110,29 @@ namespace BLogic
             foreach (Cluster c in list) {
                 if (c.Belong(report)) {
                     c.push(report);
+                    CalcAvgLoc(c); /// get real location by algo
                     return true;
                 }
             }
             return false;
+        }
+        public void Save() {
+            using (var ctx = new DB())
+            {
+                ctx.C.AddRange(list);
+                ctx.SaveChanges();
+            }
+        }
+        public void viewData() {
+            using (var context = new DB())
+            {
+                var studentAndCourseList = context.R.ToList();
+
+                foreach (var item in studentAndCourseList)
+                {
+                    Console.WriteLine("Report Id: "+ item.Id);
+                }
+            }
         }
     }
 }

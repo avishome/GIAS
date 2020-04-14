@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using LogClass;
 namespace BLogic
 {
 
@@ -17,9 +18,9 @@ namespace BLogic
            
             DataManager D = new DataManager(log);
 
-            D.InputFromAsync(GlobFuncs.getConfig("dataUrl")).Wait();
+            D.InputFromUrl(GlobFuncs.getConfig("dataUrl")).Wait();
             D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")).Wait();
-
+            D.viewData();
             Console.ReadKey();
         }
 

@@ -22,10 +22,10 @@ namespace Ui
     /// </summary>
     public partial class ReportForm : UserControl
     {
-        public Class4 s;
+        public ReportFormViewModel s;
         public ReportForm(LogEvent l, Machine machine)
         {
-            s = new Class4(l,machine);
+            s = new ReportFormViewModel(l,machine);
             DataContext = s;
             InitializeComponent();
         }

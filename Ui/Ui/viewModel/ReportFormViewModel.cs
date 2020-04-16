@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ui
 {
-    public class Class4
+    public class ReportFormViewModel
     {
         /*pubilc void postr()
         {
@@ -44,7 +44,7 @@ namespace Ui
             set { if (_val != value) { _val = value; this.UpdateSuggests(val); } }
         }
 
-        public Class4(LogEvent l, Machine machine) {
+        public ReportFormViewModel(LogEvent l, Machine machine) {
             log = l;
             _val = "";
             Suggests = new ObservableCollection<string>() { };

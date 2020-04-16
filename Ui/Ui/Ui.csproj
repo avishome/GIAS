@@ -85,37 +85,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Analysis.xaml.cs">
+    <Compile Include="views\Analysis.xaml.cs">
       <DependentUpon>Analysis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
-    <Compile Include="Class3.cs" />
-    <Compile Include="Class4.cs" />
-    <Compile Include="ClusterTab.xaml.cs">
+    <Compile Include="states\StateMachineCommand.cs" />
+    <Compile Include="states\ConfigureMachine.cs" />
+    <Compile Include="ConvertersWpf.cs" />
+    <Compile Include="viewModel\ReportFormViewModel.cs" />
+    <Compile Include="views\ClusterTab.xaml.cs">
       <DependentUpon>ClusterTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frame.xaml.cs">
       <DependentUpon>Frame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListOfCluster.xaml.cs">
+    <Compile Include="views\ListOfCluster.xaml.cs">
       <DependentUpon>ListOfCluster.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportForm.xaml.cs">
+    <Compile Include="views\ReportForm.xaml.cs">
       <DependentUpon>ReportForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportsInMap.xaml.cs">
+    <Compile Include="views\ReportsInMap.xaml.cs">
       <DependentUpon>ReportsInMap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportTab.xaml.cs">
+    <Compile Include="views\ReportTab.xaml.cs">
       <DependentUpon>ReportTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewState.cs" />
-    <Page Include="Analysis.xaml">
+    <Compile Include="states\ViewState.cs" />
+    <Page Include="views\Analysis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ClusterTab.xaml">
+    <Page Include="views\ClusterTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,11 +123,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListOfCluster.xaml">
+    <Page Include="views\ListOfCluster.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="listOfReports.xaml">
+    <Page Include="views\listOfReports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,22 +139,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="listOfReports.xaml.cs">
+    <Compile Include="views\listOfReports.xaml.cs">
       <DependentUpon>listOfReports.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ReportForm.xaml">
+    <Page Include="views\ReportForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportsInMap.xaml">
+    <Page Include="views\ReportsInMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ReportTab.xaml">
+    <Page Include="views\ReportTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,17 +187,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BLogic\BLogic.csproj">
+    <ProjectReference Include="..\..\BLogic\BisnessLogic.csproj">
       <Project>{73463ee0-376c-4c50-bbb3-5bbc7b4c2042}</Project>
-      <Name>BLogic</Name>
+      <Name>BisnessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ClassLibrary1\Entities.csproj">
       <Project>{a8c65532-a3ec-4f82-a15f-a5f235a1395b}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\LogClass\LogClass.csproj">
+    <ProjectReference Include="..\..\LogClass\Log.csproj">
       <Project>{b8ac8136-3a25-4ac3-b8a6-183a0933766d}</Project>
-      <Name>LogClass</Name>
+      <Name>Log</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

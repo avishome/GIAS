@@ -73,13 +73,13 @@
       <Project>{a8c65532-a3ec-4f82-a15f-a5f235a1395b}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dl\Dl.csproj">
+    <ProjectReference Include="..\Dl\DataLogic.csproj">
       <Project>{cae50d8a-5ad7-4c63-8e72-d696011da497}</Project>
-      <Name>Dl</Name>
+      <Name>DataLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LogClass\LogClass.csproj">
+    <ProjectReference Include="..\LogClass\Log.csproj">
       <Project>{b8ac8136-3a25-4ac3-b8a6-183a0933766d}</Project>
-      <Name>LogClass</Name>
+      <Name>Log</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

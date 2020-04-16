@@ -41,6 +41,7 @@ namespace Ui
             loge = log.LogMessege("log working:)", true);
             eventConnect();
             D.InputFromUrl(GlobFuncs.getConfig("dataUrl"));
+            
         }
         private void eventConnect() {
             //xyz.Command = Machine.CreateCommand(ViewTrigger.ClusterCombina);
@@ -51,7 +52,7 @@ namespace Ui
         }
         private void stateConfigure(Machine Machine, DataManager D) {
             
-            Machine.Configure(ViewState.Start).OnExit(() => { D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")); });
+            Machine.Configure(ViewState.Start).OnExit(() => { D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token"));loge.LogMessege("gggg", true); });
             Machine.Configure(ViewState.ClusterList).OnEntry(() => { var t = new ListOfCluster(); t.DataContext = D.List; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterMap).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(); t.DataContext = D.List; LeftBox.Content = t; });

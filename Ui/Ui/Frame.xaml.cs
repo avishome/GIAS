@@ -26,7 +26,7 @@ namespace Ui
         public ICommand See { get; set; }
 
         public ViewTrigger options = ViewTrigger.Combina; // set your default value here
-
+        public Entities.Cluster corentCluster;
         LogEvent loge;
         ReportForm Rf;
         public Frame()
@@ -52,13 +52,14 @@ namespace Ui
         }
         private void stateConfigure(Machine Machine, DataManager D) {
             
-            Machine.Configure(ViewState.Start).OnExit(() => { D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token"));loge.LogMessege("gggg", true); });
+            Machine.Configure(ViewState.Start).OnExit(() => { D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")); });
             Machine.Configure(ViewState.ClusterList).OnEntry(() => { var t = new ListOfCluster(); t.DataContext = D.List; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterMap).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; LeftBox.Content = t;  });
-            Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(); t.DataContext = D.List; LeftBox.Content = t; });
-            Machine.Configure(ViewState.ClusterCombina).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; var t2 = new listOfReports(); t2.DataContext = D.Point; LeftBox.Content = t; RightBox.Content = t2; });
+            Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(corentCluster, Machine); t.DataContext = D.List; LeftBox.Content = t; });
+            Machine.Configure(ViewState.ClusterCombina).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; var t2 = new ListOfCluster(); t2.DataContext = D.Point; LeftBox.Content = t; RightBox.Content = t2; });
             Machine.Configure(ViewState.AnalizeData).OnEntry(() => { var t = new Analysis(D);  LeftBox.Content = t;  });
             Machine.Configure(ViewState.NewReport).OnEntry(() => { AutoComplitTreament(Machine); });
+            Machine.Configure(ViewState.ReportList).OnEntry(() => { var t = new listOfReports(); t.DataContext = corentCluster; RightBox.Content = t; MessageBox.Show(corentCluster.Id); });
 
             Machine.OnTransitioned(OnTransitionAction);
         }

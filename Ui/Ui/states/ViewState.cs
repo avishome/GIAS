@@ -30,6 +30,7 @@ namespace Ui
         Tab,
         List,
         Combina,
+        ShowReports,
         DoneCollect,
         ReportMap,
         ReportTabs,

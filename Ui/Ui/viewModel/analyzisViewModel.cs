@@ -20,8 +20,8 @@ namespace Ui.viewModel
         public SeriesCollection pai { get
             {
                 var p = new SeriesCollection();
-                p.Add(new PieSeries() { Title = "in", Values = new ChartValues<int>() { t } });
-                p.Add(new PieSeries() { Title = "out", Values = new ChartValues<int>() { f } });
+                p.Add(new PieSeries() { Title = "in", Values = new ChartValues<int>() { t }, LabelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation), DataLabels = true });
+                p.Add(new PieSeries() { Title = "out", Values = new ChartValues<int>() { f }, LabelPoint = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation), DataLabels = true });
                 return p;
             } }
         private DataManager dataManager;

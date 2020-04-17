@@ -20,6 +20,7 @@ namespace Ui
     /// </summary>
     public partial class listOfReports : UserControl
     {
+        public bool isCheck { get; set; }
         public listOfReports()
         {
             InitializeComponent();

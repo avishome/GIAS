@@ -43,7 +43,7 @@
       Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
       HorizontalAlignment="Right"
       VerticalAlignment="Bottom"
-      Margin="0 0 16 -20">
+      Margin="0 0 16 -20" Click="Button_Click">
                                 <TextBlock Text="{Binding Length}"></TextBlock>
                             </Button>
                             <StackPanel
@@ -71,7 +71,7 @@
                                     <TextBlock Text="{Binding Id}"></TextBlock>
                                 </Viewbox>
 
-                                <local:listOfReports DataContext="{Binding list}"></local:listOfReports>
+                                <local:listOfReports DataContext="{Binding}"></local:listOfReports>
                                
                             </StackPanel>
                             <Separator
@@ -80,6 +80,8 @@
       Margin="8 0 8 0" />
                             <StackPanel Grid.Row="5">
                                 <Button
+                                    DataContext="{Binding}"
+                                    Click="Button_Click"
         Style="{StaticResource MaterialDesignFlatButton}"
         HorizontalAlignment="Center"
         Margin="8 4 8 8">

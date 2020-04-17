@@ -35,7 +35,8 @@ namespace Ui
                 .Permit(ViewTrigger.Tab, ViewState.ClusterTabs)
                 .Permit(ViewTrigger.Map, ViewState.ClusterMap)
                 .Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData)
-                .Permit(ViewTrigger.NewReport,ViewState.NewReport);
+                .Permit(ViewTrigger.NewReport,ViewState.NewReport)
+                .Permit(ViewTrigger.ShowReports,ViewState.ReportList);
             
             this.Configure(ViewState.AnalizeData).OnEntry(()=> { Console.Write("analize"); })
                 .SubstateOf(ViewState.Cluster);
@@ -65,7 +66,8 @@ namespace Ui
                 .Permit(ViewTrigger.Map, ViewState.ReportMap)
                 .Permit(ViewTrigger.Tab, ViewState.ReportTabs)
                 .Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData)
-                .Permit(ViewTrigger.NewReport, ViewState.NewReport); ;
+                .Permit(ViewTrigger.NewReport, ViewState.NewReport)
+                .Permit(ViewTrigger.ShowReports, ViewState.ReportList);
 
             this.Configure(ViewState.ReportView)
                 .OnEntry(() => { Console.Write("view report"); })

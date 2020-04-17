@@ -30,8 +30,7 @@ namespace Ui
             Vm = new analyzisViewModel(d);
 
             InitializeComponent();
-            PointLabel = chartPoint =>
-                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
+            PointLabel = chartPoint => string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
              DataContext = this;
 
         }

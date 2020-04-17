@@ -20,14 +20,20 @@ namespace Ui
     /// </summary>
     public partial class ClusterTab : UserControl
     {
-        public ClusterTab()
+        public Entities.Cluster corentCluster { get; set; }
+
+        public Machine Machine { get; }
+
+        public ClusterTab(Entities.Cluster corentCluster, Machine machine)
         {
+            this.corentCluster = corentCluster;
+            Machine = machine;
             InitializeComponent();
         }
-        public event RoutedEventHandler ButtonClick;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ButtonClick(this, e);
+            corentCluster = (Entities.Cluster)(sender as Button).DataContext;
+            Machine.Fire(ViewTrigger.ShowReports);
         }
     }
 }

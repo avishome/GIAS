@@ -20,7 +20,8 @@ namespace Ui
             this.Configure(ViewState.Start)
                 .OnEntry(() => { Console.Write("start"); })
                 .Permit(ViewTrigger.DoneCollect, ViewState.ClusterCombina)
-                .Permit(ViewTrigger.NewReport, ViewState.NewReport);
+                .Permit(ViewTrigger.NewReport, ViewState.NewReport).
+                Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData);
 
             // Refund money
             this.Configure(ViewState.ClusterView)

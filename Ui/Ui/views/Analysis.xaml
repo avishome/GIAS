@@ -13,25 +13,29 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Slider
+            Name="slide"
             Grid.Row="0"
-  TickFrequency="5"
+  TickFrequency="100"
   Orientation="Horizontal"
   TickPlacement="BottomRight"
   Minimum="1"
-  Maximum="50"
-  Value="25"
+  Maximum="2000"
+  Value="{Binding Vm.dis, NotifyOnSourceUpdated=True}"
   IsSelectionRangeEnabled="True"
   Style="{StaticResource MaterialDesignDiscreteSlider}"
   ToolTip="MaterialDesignDiscreteSlider"
-            />
-        <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Grid.Row="1">
+            >
             
-            <lvc:PieChart.Series>
-                
-                <lvc:PieSeries Title="Maria" Values="3" DataLabels="True" 
+            
+        </Slider>
+        <lvc:PieChart Name="av" Series="{Binding Vm.pai}" LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Grid.Row="1">
+            
+            <!--lvc:PieChart.Series>
+
+                <lvc:PieSeries Title="Maria" Values="{Binding Vm.t}" DataLabels="True" 
                                 LabelPoint="{Binding PointLabel}"/>
-                
-                <lvc:PieSeries Title="Charles" Values="4" DataLabels="True"  
+
+                <lvc:PieSeries Title="Charles" Values="{Binding Vm.f}" DataLabels="True"  
                                 LabelPoint="{Binding PointLabel}"/>
                 
                 <lvc:PieSeries Title="Frida" Values="6" DataLabels="True"  
@@ -40,7 +44,7 @@
                 <lvc:PieSeries Title="Frederic" Values="2" DataLabels="True"  
                                 LabelPoint="{Binding PointLabel}"/>
                 
-            </lvc:PieChart.Series>
+            </-->
             
         </lvc:PieChart>
 

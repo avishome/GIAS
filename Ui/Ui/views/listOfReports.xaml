@@ -50,7 +50,7 @@
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                 <!-- set a max length to get an indicator in the editor -->
                 <materialDesign:DataGridTextColumn
-      Binding="{Binding Path=p1}" 
+      Binding="{Binding Path=loc.display_name}" 
                                 Header="Location"
       MaxLength="255"
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />

@@ -66,7 +66,7 @@
       Margin="8 24 8 4">
                                 <TextBlock
         Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-        Margin="0" Text="{Binding loc}">
+        Margin="0" Text="{Binding loc.display_name}">
       Location
                                 </TextBlock>
                                 <TextBlock

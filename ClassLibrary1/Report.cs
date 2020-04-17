@@ -15,7 +15,7 @@ namespace Entities
         public Adrress loc { get; set; }
         public string picture { get {
                 return "http://www.us-central1-vivid-fragment-225620.cloudfunctions.net/download?file=" + pic; } }
-                public Report(string id, DateTime dateTime, string[] p1, string p2)
+        public Report(string id, DateTime dateTime, string[] p1, string p2)
         {
             this.dateTime = dateTime;
             if (p1.Length != 2) throw new Exception("position not in good format" + p1.ToString());
@@ -38,7 +38,7 @@ namespace Entities
 
         public bool needAttr()
         {
-            if(!(loc is null)) return true;
+            if(loc is null) return true;
             return false;
         }
 

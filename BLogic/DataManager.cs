@@ -14,6 +14,51 @@ namespace BLogic
         private Log log;
 
         private List<Cluster> list = new List<Cluster>();
+
+        public (int t, int f) Analize(double v)
+        {
+            int t = 0;
+            int f = 0;
+            foreach (Cluster c in list) {
+                CalcAvgLoc(c);
+                c.RealPlace = c.list.FirstOrDefault();
+                if (DistanceTo(double.Parse(c.RealPlace.p1), double.Parse(c.RealPlace.p2),
+                    double.Parse(c.AdrressByAlgo.p1), double.Parse(c.AdrressByAlgo.p2)) > v)
+                    f++;
+                else
+                    t++;
+            }
+            return (t, f);
+        }
+
+
+
+        public double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
+        {
+            double rlat1 = Math.PI * lat1 / 180;
+            double rlat2 = Math.PI * lat2 / 180;
+            double theta = lon1 - lon2;
+            double rtheta = Math.PI * theta / 180;
+            double dist =
+                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                Math.Cos(rlat2) * Math.Cos(rtheta);
+            dist = Math.Acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+
+            switch (unit)
+            {
+                case 'K': //Kilometers -> default
+                    return dist * 1.609344;
+                case 'N': //Nautical Miles 
+                    return dist * 0.8684;
+                case 'M': //Miles
+                    return dist;
+            }
+
+            return dist;
+        }
+
         public List<Cluster> List { get { return list; } set { } }
         public List<Report> Point { get {
                 List<Report> temp = new List<Report>();
@@ -49,12 +94,15 @@ namespace BLogic
             foreach (Cluster c in list)
             {
                 foreach (Report r in c)
+                {
                     if (r.needAttr())
                     {
-                        FindLocAsync(r,s, token, task);
+                        await FindLocAsync(r, s, token, task);
 
-                        
+
                     }
+                    
+                }
                 break;
             }
         }
@@ -111,6 +159,7 @@ namespace BLogic
                 if (c.Belong(report)) {
                     c.push(report);
                     CalcAvgLoc(c); /// get real location by algo
+                    
                     return true;
                 }
             }

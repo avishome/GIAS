@@ -57,24 +57,34 @@ namespace Ui
             Machine.Configure(ViewState.ClusterMap).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(); t.DataContext = D.List; LeftBox.Content = t; });
             Machine.Configure(ViewState.ClusterCombina).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; var t2 = new listOfReports(); t2.DataContext = D.Point; LeftBox.Content = t; RightBox.Content = t2; });
-            Machine.Configure(ViewState.AnalizeData).OnEntry(() => { var t = new Analysis();  LeftBox.Content = t;  });
-            Machine.Configure(ViewState.NewReport).OnEntry(() => { if (Rf is null) Rf = new ReportForm(loge, Machine); else {
-                    var t = new ReportsInMap(); 
-                    List<Entities.Report> q = new List<Entities.Report>(); 
-                    if(!(Rf.s.internet.data is null))
-                    foreach (var i in Rf.s.internet.data) {
+            Machine.Configure(ViewState.AnalizeData).OnEntry(() => { var t = new Analysis(D);  LeftBox.Content = t;  });
+            Machine.Configure(ViewState.NewReport).OnEntry(() => { AutoComplitTreament(Machine); });
+
+            Machine.OnTransitioned(OnTransitionAction);
+        }
+
+        private void AutoComplitTreament(Machine Machine)
+        {
+            if (Rf is null) Rf = new ReportForm(loge, Machine);
+            else
+            {
+                var t = new ReportsInMap();
+                List<Entities.Report> q = new List<Entities.Report>();
+                if (!(Rf.s.internet.data is null))
+                    foreach (var i in Rf.s.internet.data)
+                    {
                         q.Add(new Entities.Report()
                         {
                             p1 = ((dynamic)i)["lat"],
                             p2 = ((dynamic)i)["lon"]
-                        }); 
-                    }; 
-                    t.DataContext2 = q; 
-                    RightBox.Content = t;
-                } LeftBox.Content = Rf; });
-
-            Machine.OnTransitioned(OnTransitionAction);
+                        });
+                    };
+                t.DataContext2 = q;
+                RightBox.Content = t;
+            }
+            LeftBox.Content = Rf;
         }
+
         private void OnTransitionAction(Machine.Transition transition)
         {
             console.Text = String.Format("Transition from {0} to {1}, trigger = {2}.", transition.Source, transition.Destination, transition.Trigger);

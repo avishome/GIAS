@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts; 
 using LiveCharts.Wpf;
+using Ui.viewModel;
 
 namespace Ui
 {
@@ -22,8 +23,12 @@ namespace Ui
     /// </summary>
     public partial class Analysis : UserControl
     {
-        public Analysis()
+        public SeriesCollection pai { get; set; }
+        public analyzisViewModel Vm { get; set; }
+        public Analysis(BLogic.DataManager d)
         {
+            Vm = new analyzisViewModel(d);
+
             InitializeComponent();
             PointLabel = chartPoint =>
                  string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);

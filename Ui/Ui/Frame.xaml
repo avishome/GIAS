@@ -246,11 +246,13 @@
       Margin="16"
       HorizontalAlignment="Center"
       Orientation="Horizontal">
+                <ScrollViewer>
                 <TextBlock
         Margin="4"
         VerticalAlignment="Center" Name="fullLog">
-      Full Log Here
+                Full Log Here
                 </TextBlock>
+                </ScrollViewer>
                 <Button
         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
         CommandParameter="{x:Static Dock.Bottom}"

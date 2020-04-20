@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -20,10 +21,15 @@ namespace Ui
     /// </summary>
     public partial class listOfReports : UserControl
     {
-        public bool isCheck { get; set; }
         public listOfReports()
         {
             InitializeComponent();
+            for (int i = 0; i < item.Items.Count; i++) {
+
+                ContentPresenter c = (ContentPresenter)item.ItemContainerGenerator.ContainerFromItem(item.Items[i]);
+                ToggleButton tb = c.ContentTemplate.FindName("mybtn", c) as ToggleButton;
+                if (!tb.IsChecked.Value) { MessageBox.Show("f"); }
+            }
         }
     }
 }

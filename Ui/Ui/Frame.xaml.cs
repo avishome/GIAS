@@ -51,16 +51,15 @@ namespace Ui
             switch4.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.Combina));
         }
         private void stateConfigure(Machine Machine, DataManager D) {
-            
+            var w = Machine.SetTriggerParameters<Entities.Cluster>(ViewTrigger.ShowReports);
             Machine.Configure(ViewState.Start).OnExit(() => { D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")); });
             Machine.Configure(ViewState.ClusterList).OnEntry(() => { var t = new ListOfCluster(); t.DataContext = D.List; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterMap).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; LeftBox.Content = t;  });
-            Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(corentCluster, Machine); t.DataContext = D.List; LeftBox.Content = t; });
+            Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(corentCluster, Machine, w); t.close += (Entities.Cluster c) => { }; t.DataContext = D.List; LeftBox.Content = t; });
             Machine.Configure(ViewState.ClusterCombina).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; var t2 = new ListOfCluster(); t2.DataContext = D.Point; LeftBox.Content = t; RightBox.Content = t2; });
             Machine.Configure(ViewState.AnalizeData).OnEntry(() => { var t = new Analysis(D);  LeftBox.Content = t;  });
             Machine.Configure(ViewState.NewReport).OnEntry(() => { AutoComplitTreament(Machine); });
-            Machine.Configure(ViewState.ReportList).OnEntry(() => { var t = new listOfReports(); t.DataContext = corentCluster; RightBox.Content = t; MessageBox.Show(corentCluster.Id); });
-
+            Machine.Configure(ViewState.ReportList).OnEntryFrom<Entities.Cluster>(w, (C) => { listOfReports t = new listOfReports(); t.DataContext = C; RightBox.Content = t; });
             Machine.OnTransitioned(OnTransitionAction);
         }
 

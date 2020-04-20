@@ -96,6 +96,8 @@ namespace Ui
             this.Configure(ViewState.ReportTabs)
                 .OnEntry(() => { Console.Write("view report tab"); })
                 .SubstateOf(ViewState.Report);
+            
+            
 
         }
     }

@@ -71,8 +71,6 @@
                                     <TextBlock Text="{Binding Id}"></TextBlock>
                                 </Viewbox>
 
-                                <local:listOfReports DataContext="{Binding}"></local:listOfReports>
-                               
                             </StackPanel>
                             <Separator
       Grid.Row="2"

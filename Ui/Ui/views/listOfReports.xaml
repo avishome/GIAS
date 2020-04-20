@@ -7,8 +7,10 @@
              xmlns:local="clr-namespace:Ui"
              mc:Ignorable="d" 
              d:DesignHeight="110" d:DesignWidth="300">
+
     <Grid>
         <ItemsControl
+            Name="item"
   ItemsSource="{Binding list}"
   Grid.IsSharedSizeScope="True">
             <ItemsControl.ItemTemplate>
@@ -26,8 +28,9 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <ToggleButton
+                                Name ="mybtn"
             VerticalAlignment="Center"
-            IsChecked="True"
+            IsChecked="{Binding Path=IsAccurate}"
             Style="{StaticResource MaterialDesignActionLightToggleButton}"
             Content="{Binding Path=Id}" />
                             <StackPanel

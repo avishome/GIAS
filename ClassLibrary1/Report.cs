@@ -8,6 +8,7 @@ namespace Entities
     {
         
         public string Id { get; set; }
+        public bool IsAccurate { get; set; }
         public DateTime dateTime { get; set; }
         public string p1 { get; set; }
         public string p2 { get; set; }
@@ -22,11 +23,13 @@ namespace Entities
             this.p1 = p1[0];
             this.p2 = p1[1];
             if (p2.Length != 0) pic = p2;
+            if (p2.Length != 0) IsAccurate = true; else IsAccurate = false;
             this.Id = id;
             //loc = new Adrress("ff");
         }
         public Report()
         {
+            IsAccurate = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,16 +45,5 @@ namespace Entities
             return false;
         }
 
-
-        /*public async System.Threading.Tasks.Task<string> FindLocAsync(string s, string token, LogEvent task)
-        {
-            string request = string.Format(s, p1, p2, token);
-            task.LogMessege("sent request to: " + request, true);
-            OnlineStreem Streem = new OnlineStreem(request, task);
-            await Streem.PostCallAPI();
-            SetLoc(Streem.getLoc());
-            task.LogMessege(loc, false);
-            return loc;
-        }*/
     }
 }

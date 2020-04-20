@@ -20,12 +20,15 @@ namespace Ui
     /// </summary>
     public partial class ClusterTab : UserControl
     {
+        public delegate void ClusterSelected(Entities.Cluster c);
+        public event ClusterSelected close;
         public Entities.Cluster corentCluster { get; set; }
-
+        public Stateless.StateMachine<ViewState, ViewTrigger>.TriggerWithParameters<Entities.Cluster> w;
         public Machine Machine { get; }
 
-        public ClusterTab(Entities.Cluster corentCluster, Machine machine)
+        public ClusterTab(Entities.Cluster corentCluster, Machine machine, Stateless.StateMachine<ViewState, ViewTrigger>.TriggerWithParameters<Entities.Cluster> w)
         {
+            this.w = w;
             this.corentCluster = corentCluster;
             Machine = machine;
             InitializeComponent();
@@ -33,7 +36,7 @@ namespace Ui
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             corentCluster = (Entities.Cluster)(sender as Button).DataContext;
-            Machine.Fire(ViewTrigger.ShowReports);
+            Machine.Fire(w, (Entities.Cluster)(sender as Button).DataContext);
         }
     }
 }

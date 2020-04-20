@@ -7,4 +7,3 @@ C:\Users\מרים\Desktop\BLogic\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
 C:\Users\מרים\Desktop\BLogic\ClassLibrary1\obj\Debug\Entities.csprojAssemblyReference.cache
 C:\Users\מרים\Desktop\BLogic\ClassLibrary1\obj\Debug\ClassLibrary1.dll
 C:\Users\מרים\Desktop\BLogic\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
-C:\Users\מרים\Desktop\BLogic\ClassLibrary1\obj\Debug\Entities.csproj.Fody.CopyLocal.cache

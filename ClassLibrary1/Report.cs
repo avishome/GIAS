@@ -1,10 +1,10 @@
-﻿using PropertyChanged;
+﻿
 using System;
 using System.ComponentModel;
 
 namespace Entities
 {
-    public class Report : INotifyPropertyChanged
+    public class Report 
     {
         
         public string Id { get; set; }

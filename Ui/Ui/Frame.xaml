@@ -41,7 +41,7 @@
   Padding="16">
                 <DockPanel>
                     <materialDesign:PopupBox DockPanel.Dock="Right"
-  Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+ 
   PlacementMode="BottomAndAlignRightEdges"
   ToolTipService.Placement="Right"
   ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"

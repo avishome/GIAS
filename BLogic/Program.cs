@@ -17,10 +17,9 @@ namespace BLogic
             Log log = new Log(new Callback(GlobFuncs.MainStatus));
            
             DataManager D = new DataManager(log);
-
             D.InputFromUrl(GlobFuncs.getConfig("dataUrl")).Wait();
             D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")).Wait();
-            D.viewData();
+            //D.viewData();
             Console.ReadKey();
         }
 

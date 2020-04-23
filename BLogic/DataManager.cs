@@ -19,7 +19,7 @@ namespace BLogic
         {
             int t = 0;
             int f = 0;
-            foreach (Cluster c in list) {
+            foreach (Cluster c in List) {
                 CalcAvgLoc(c);
                 c.RealPlace = c.list.FirstOrDefault();
                 if (DistanceTo(double.Parse(c.RealPlace.p1), double.Parse(c.RealPlace.p2),
@@ -30,8 +30,6 @@ namespace BLogic
             }
             return (t, f);
         }
-
-
 
         public double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
         {
@@ -59,10 +57,24 @@ namespace BLogic
             return dist;
         }
 
-        public List<Cluster> List { get { return list; } set { } }
+        public List<Cluster> List { get
+            {
+                if(list == null)
+                    using (var context = new DB14())
+                    {
+                        list = context.C.ToList();
+
+                        foreach (Cluster c in List)
+                        {
+                            c.list = context.R.Where(l => l.ClusterId == c.Id).ToList();
+                        }
+                    }
+                return list;
+            }
+                    set { list = value; } }
         public List<Report> Point { get {
                 List<Report> temp = new List<Report>();
-                foreach (Cluster i in list) 
+                foreach (Cluster i in List) 
                     if(!(i.FirstOrDefault() is null && i.size()<2))temp.Add(i.FirstOrDefault()); 
                     else if(!(i.AdrressByAlgo is null)) temp.Add(i.AdrressByAlgo);
                 return temp;
@@ -84,26 +96,36 @@ namespace BLogic
 
             Catalog(Streem.toReportList());
 
-            log.LogMessege("there are: " + list.Count + " Clusters | Done", task, false);
+            log.LogMessege("there are: " + List.Count + " Clusters | Done", task, false);
             
          }
 
         public async Task labelDataAsync(string s,string token)
         {
-            LogEvent task = log.LogMessege("labeld data", true);
-            foreach (Cluster c in list)
+            using (var context = new DB14())
             {
-                foreach (Report r in c)
+                var a = context.A.ToList();
+                List = context.C.ToList();
+
+                LogEvent task = log.LogMessege("labeld data", true);
+                
+                foreach (Cluster c in List)
                 {
-                    if (r.needAttr())
+                    var d = context.R.ToList();
+                    c.list = context.R.Where(l => l.ClusterId == c.Id).ToList();
+                    
+                    foreach (Report r in c)
                     {
-                        await FindLocAsync(r, s, token, task);
-
-
+               
+                        if (r.needAttr())
+                        {
+                            await FindLocAsync(r, s, token, task);
+                            
+                        }
                     }
+                    context.SaveChanges();
                     
                 }
-                break;
             }
         }
 
@@ -149,37 +171,89 @@ namespace BLogic
 
         private void createNewCluster(Report report)
         {
-            list.Add(new Cluster(report));
-            log.LogMessege("create new Clusters at " + report.GetDateTime().ToString(), false);
+            using (var context = new DB14())
+            {
+                log.LogMessege("create new");
+                var nr = new Cluster(report);
+                //context.R.Add(report);
+                context.C.Add(nr);
+                log.LogMessege("try save the new one");
+                context.SaveChanges();
+                //list.Add();
+                log.LogMessege("create new Clusters at " + report.GetDateTime().ToString(), false);
+            }
         }
 
         private bool findCluster(Report report)
         {
-            foreach (Cluster c in list) {
-                if (c.Belong(report)) {
-                    c.push(report);
-                    CalcAvgLoc(c); /// get real location by algo
-                    
-                    return true;
+            if (exist(report)) return true;
+
+            using (var context = new DB14())
+            {
+                var studentAndCourseList = context.C.ToList();
+                if (studentAndCourseList.Count == 0) return false;
+
+                foreach (Cluster c in studentAndCourseList)
+                {
+                    c.list = context.R.Where(l => l.ClusterId == c.Id).ToList();
+                    if (c.Belong(report))
+                    {
+                        c.push(report);
+                        CalcAvgLoc(c); /// get real location by algo
+
+                        context.SaveChanges();
+                        return true;
+                    }
                 }
             }
             return false;
         }
-        public void Save() {
-            using (var ctx = new DB())
+        private bool exist(Report report) {
+            using (var context = new DB14())
             {
-                ctx.C.AddRange(list);
+                var studentAndCourseList = context.R.ToList();
+                var loc = context.A.ToList();
+                foreach (var item in studentAndCourseList)
+                {
+                    if (item.Id == report.Id)
+                    {
+                        log.LogMessege("Report Id exist: " + item.Id);
+                        return true;
+                    }
+                }
+                log.LogMessege("Report dont find at data base" + report.Id);
+                return false;
+            }
+        }
+        public void Save() {
+            using (var ctx = new DB14())
+            {
+                var t1 = ctx.R.ToList();
+                var t2 = ctx.C.ToList();
+                var t3 = ctx.A.ToList();
+                foreach (var l in List) {
+                    var resToUpdate = ctx.C.AsNoTracking().Select(x => x.Id == l.Id);
+                    if (resToUpdate != null)
+                    {
+                        ctx.C.Attach(l);
+                        ctx.Entry(l).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                        ctx.C.Add(l);
+                }
+                log.LogMessege("saveing");
                 ctx.SaveChanges();
             }
         }
         public void viewData() {
-            using (var context = new DB())
+            using (var context = new DB14())
             {
+                log.LogMessege("hi");
                 var studentAndCourseList = context.R.ToList();
-
+                log.LogMessege(studentAndCourseList.Count.ToString());
                 foreach (var item in studentAndCourseList)
                 {
-                    Console.WriteLine("Report Id: "+ item.Id);
+                    log.LogMessege("Report Id: "+ item.Id);
                 }
             }
         }

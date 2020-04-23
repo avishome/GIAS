@@ -114,6 +114,7 @@ namespace BLogic
                         ((string)content["element_3"]).Split('$'),
                         (string)content["element_2"]
                         );
+                    item.loc = new Adrress();
                     all.push(item);  
                 } catch(Exception e) {
                     log.LogMessege("one entery fail: "+ e.ToString(), false);

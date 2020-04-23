@@ -2,23 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Entities
 {
-    public class Cluster : IEnumerable<Report>, INotifyPropertyChanged
+    public class Cluster : IEnumerable<Report>
     {
+        [Key]
         public String Id { get; set; }
         public ICollection<Report> list { get; set; }
+        [NotMapped]
         public Report RealAdress { get; set; }
+        [NotMapped]
         public Report AdrressByAlgo { get; set; }
         public int Length { get { return list.Count(); } set { } }
+        [NotMapped]
         public Report RealPlace { get { foreach (Report r in list) if (!(r.pic is null) && (r.pic != "")) return r; return RealAdress; } set { RealAdress = value; } }
         public Cluster(Report report)
         {
             list = new LinkedList<Report>();
             Id = generateID();
             list.Add(report);
+            RealAdress = report;
+            AdrressByAlgo = report;
+
         }
 
         public Cluster()
@@ -27,7 +36,6 @@ namespace Entities
             Id = generateID();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string generateID()
         {

@@ -1,13 +1,17 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
     public class Report 
     {
-        
+        [Key]
         public string Id { get; set; }
+        public string ClusterId { get; set; }
+        public Cluster Cluster { get; set; }
         public bool IsAccurate { get; set; }
         public DateTime dateTime { get; set; }
         public string p1 { get; set; }
@@ -32,7 +36,7 @@ namespace Entities
             IsAccurate = false;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public DateTime GetDateTime()
         {
@@ -41,7 +45,7 @@ namespace Entities
 
         public bool needAttr()
         {
-            if(loc is null) return true;
+            if(loc is null || loc.display_name == "") return true;
             return false;
         }
 

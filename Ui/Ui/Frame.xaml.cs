@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Ui.views;
 
 namespace Ui
 {
@@ -29,8 +30,11 @@ namespace Ui
         public Entities.Cluster corentCluster;
         LogEvent loge;
         ReportForm Rf;
+        public wellcome wellcome;
         public Frame()
         {
+            wellcome = new wellcome();
+            wellcome.Show();
             Log log = new Log(new Callback(MainStatus));
             
             Machine = new Machine();
@@ -41,9 +45,12 @@ namespace Ui
             loge = log.LogMessege("log working:)", true);
             eventConnect();
             D.InputFromUrl(GlobFuncs.getConfig("dataUrl"));
-            
+            D.viewData();
+
+
         }
         private void eventConnect() {
+            
             //xyz.Command = Machine.CreateCommand(ViewTrigger.ClusterCombina);
             switch1.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.Map));
             switch2.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.Tab));
@@ -52,7 +59,7 @@ namespace Ui
         }
         private void stateConfigure(Machine Machine, DataManager D) {
             var w = Machine.SetTriggerParameters<Entities.Cluster>(ViewTrigger.ShowReports);
-            Machine.Configure(ViewState.Start).OnExit(() => { D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")); });
+            Machine.Configure(ViewState.Start).OnExit(() => { wellcome.Close(); D.labelDataAsync(GlobFuncs.getConfig("serviceMap"), GlobFuncs.getConfig("token")); });
             Machine.Configure(ViewState.ClusterList).OnEntry(() => { var t = new ListOfCluster(); t.DataContext = D.List; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterMap).OnEntry(() => { var t = new ReportsInMap(); t.DataContext2 = D.Point; LeftBox.Content = t;  });
             Machine.Configure(ViewState.ClusterTabs).OnEntry(() => { var t = new ClusterTab(corentCluster, Machine, w); t.close += (Entities.Cluster c) => { }; t.DataContext = D.List; LeftBox.Content = t; });

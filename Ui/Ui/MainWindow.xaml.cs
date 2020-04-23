@@ -27,9 +27,9 @@ namespace Ui
             Frame f = new Frame();
             f.Show();
             ReportsList = new List<Report>();
-            ReportsList.Add(new Report() { Id = "Complete this WPF tutorial", dateTime = new DateTime(2018, 2, 2), loc = new Adrress("fgf"), p1="37.806029", p2="-122.407007" });
-            ReportsList.Add(new Report() { Id = "fsdsdgsd", dateTime = new DateTime(2018, 12, 12), loc = new Adrress("dss"), p1 = "33.806029", p2 = "-122.407007" });
-            ReportsList.Add(new Report() { Id = "Complete this ", dateTime = new DateTime(2028, 1, 2), loc = new Adrress("ffdddgf"), p1 = "37.806029", p2 = "-125.407007" });
+            ReportsList.Add(new Report() { Id = "Complete this WPF tutorial", dateTime = new DateTime(2018, 2, 2), loc = new Adrress(""), p1="37.806029", p2="-122.407007" });
+            ReportsList.Add(new Report() { Id = "fsdsdgsd", dateTime = new DateTime(2018, 12, 12), loc = new Adrress(""), p1 = "33.806029", p2 = "-122.407007" });
+            ReportsList.Add(new Report() { Id = "Complete this ", dateTime = new DateTime(2028, 1, 2), loc = new Adrress(""), p1 = "37.806029", p2 = "-125.407007" });
             
             InitializeComponent();
             

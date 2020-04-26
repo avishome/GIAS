@@ -36,8 +36,9 @@ namespace Ui
                 .Permit(ViewTrigger.Map, ViewState.ClusterMap)
                 .Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData)
                 .Permit(ViewTrigger.NewReport,ViewState.NewReport)
-                .Permit(ViewTrigger.ShowReports,ViewState.ReportList);
-            
+                .Permit(ViewTrigger.ShowReports,ViewState.ReportList)
+                .Permit(ViewTrigger.back, ViewState.AllReports);
+
             this.Configure(ViewState.AnalizeData).OnEntry(()=> { Console.Write("analize"); })
                 .SubstateOf(ViewState.Cluster);
 
@@ -57,7 +58,7 @@ namespace Ui
                 .OnEntry(() => { Console.Write("view cluter Tab"); })
                 .SubstateOf(ViewState.Cluster);
 
-            
+
             // CanSelectCoffee
             this.Configure(ViewState.Report)
                 .OnEntry(() => { Console.Write("Report"); })
@@ -67,7 +68,14 @@ namespace Ui
                 .Permit(ViewTrigger.Tab, ViewState.ReportTabs)
                 .Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData)
                 .Permit(ViewTrigger.NewReport, ViewState.NewReport)
-                .Permit(ViewTrigger.ShowReports, ViewState.ReportList);
+                .Permit(ViewTrigger.ShowReports, ViewState.ReportList)
+                .Permit(ViewTrigger.back, ViewState.AllReports);
+
+            this.Configure(ViewState.AllReports)
+               .OnEntry(() => { Console.Write("all report"); })
+               .Permit(ViewTrigger.ClusterCombina, ViewState.ClusterCombina)
+               .Permit(ViewTrigger.back, ViewState.ClusterCombina)
+               .SubstateOf(ViewState.Report);
 
             this.Configure(ViewState.ReportView)
                 .OnEntry(() => { Console.Write("view report"); })

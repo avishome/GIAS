@@ -51,7 +51,7 @@
   Content="Analize Report"
   IconBackground="{DynamicResource PrimaryHueDarkBrush}"
   IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                                                 Click="Chip_Click">
+                                              Command="{Binding Analitics}">
                                 <materialDesign:Chip.Icon>
                                     <materialDesign:PackIcon
       Kind="Twitter"></materialDesign:PackIcon>
@@ -60,7 +60,8 @@
                             <materialDesign:Chip Margin="4"
   Content="ViewReports"
   IconBackground="{DynamicResource PrimaryHueDarkBrush}"
-  IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+  IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                 Command="{Binding Back}">
                                 <materialDesign:Chip.Icon>
                                     <materialDesign:PackIcon
       Kind="Twitter"></materialDesign:PackIcon>
@@ -70,7 +71,7 @@
   Content="New Report"
   IconBackground="{DynamicResource PrimaryHueDarkBrush}"
   IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                                                 Click="xyz_Click">
+                                                 Command="{Binding NewReport}">
                                 <materialDesign:Chip.Icon>
                                     <materialDesign:PackIcon
       Kind="Twitter"></materialDesign:PackIcon>
@@ -163,7 +164,7 @@
                             <RadioButton
     Style="{StaticResource MaterialDesignTabRadioButton}"
     IsChecked="{Binding Path=Options, Converter={
-    StaticResource EnumToBoolConverter}, ConverterParameter=ClusterMap}"
+    StaticResource EnumToBoolConverter}, ConverterParameter=Map}"
     Name="switch1"
     Content="Map"
                                
@@ -173,7 +174,7 @@
     Name="switch2"
     Content="Tab"
                                 IsChecked="{Binding Path=Options, Converter={
-    StaticResource EnumToBoolConverter}, ConverterParameter=ClusterTabs}"
+    StaticResource EnumToBoolConverter}, ConverterParameter=Tab}"
 
                                
                                 />
@@ -182,14 +183,14 @@
      Content="List"                           
     Style="{StaticResource MaterialDesignTabRadioButton}" 
     IsChecked="{Binding Path=Options, Converter={
-    StaticResource EnumToBoolConverter}, ConverterParameter=ClusterList}"
+    StaticResource EnumToBoolConverter}, ConverterParameter=List}"
                               />
                             <RadioButton 
                                 Name="switch4"
     Content="Combina"                            
     Style="{StaticResource MaterialDesignTabRadioButton}" 
     IsChecked="{Binding Path=Options, Converter={
-    StaticResource EnumToBoolConverter}, ConverterParameter=ClusterCombina}"
+    StaticResource EnumToBoolConverter}, ConverterParameter=Combina}"
                               />
 
 
@@ -212,16 +213,34 @@
         CommandParameter="{x:Static Dock.Left}"
         Margin="4"
         HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}">
+        Style="{DynamicResource MaterialDesignFlatButton}"
+                    Click="Button_Click">
                     Cluster List
+                </Button>
+                <Button
+                    
+        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+        CommandParameter="{x:Static Dock.Left}"
+        Margin="4"
+        HorizontalAlignment="Center"
+        Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_1">
+                    Reports List
                 </Button>
                 <Button
         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
         CommandParameter="{x:Static Dock.Left}"
         Margin="4"
         HorizontalAlignment="Center"
-        Style="{DynamicResource MaterialDesignFlatButton}">
-                    Reports List
+        Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_2">
+                    New Report
+                </Button>
+                <Button
+        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+        CommandParameter="{x:Static Dock.Left}"
+        Margin="4"
+        HorizontalAlignment="Center"
+        Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click_3">
+                    Analitics
                 </Button>
                 <Button
         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
@@ -237,30 +256,39 @@
         Margin="4"
         HorizontalAlignment="Center"
         Style="{DynamicResource MaterialDesignFlatButton}">
-                    Reprot on Bug
+                    Report about Bugs
+                </Button>
+                <Button
+        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+        CommandParameter="{x:Static Dock.Left}"
+        Margin="4"
+        HorizontalAlignment="Center"
+        Style="{DynamicResource MaterialDesignFlatButton}">
+                    Save all Changes
                 </Button>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
         <materialDesign:DrawerHost.BottomDrawerContent>
             <StackPanel
-      Margin="16"
+      
       HorizontalAlignment="Center"
-      Orientation="Horizontal">
-                <ScrollViewer>
-                <TextBlock
-        Margin="4"
-        VerticalAlignment="Center" Name="fullLog">
-                Full Log Here
-                </TextBlock>
-                </ScrollViewer>
+      Orientation="Vertical">
                 <Button
         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
         CommandParameter="{x:Static Dock.Bottom}"
         Style="{DynamicResource MaterialDesignFlatButton}"
         Margin="4"
         VerticalAlignment="Center">
-                    CLOSE THIS
+                    Hide
                 </Button>
+                <ScrollViewer MaxHeight="400">
+                <TextBlock
+        Margin="4"
+        VerticalAlignment="Center" Name="fullLog">
+                Full Log Here
+                </TextBlock>
+                </ScrollViewer>
+
             </StackPanel>
         </materialDesign:DrawerHost.BottomDrawerContent>
     </materialDesign:DrawerHost>

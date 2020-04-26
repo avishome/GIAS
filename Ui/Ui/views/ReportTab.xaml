@@ -50,48 +50,32 @@
         Height="Auto" />
                             </Grid.RowDefinitions>
                             <Image
-      Source="https://www.wpf-tutorial.com/Images/ArticleImages/1/chapters/panels/stackpanel_vertical_simple.png"
+      Source="{Binding RealPlace.picture}"
       Height="140"
       Stretch="UniformToFill" />
-                            <Button
-      Grid.Row="0"
-      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Bottom"
-      Margin="0 0 16 -20">
-                                <TextBlock>56</TextBlock>
-                            </Button>
+                            <ToggleButton
+                                Grid.Row="0"
+                                Name ="mybtn"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                    Margin="0 0 16 -20"
+            IsChecked="{Binding Path=IsAccurate}"
+            Style="{StaticResource MaterialDesignActionLightToggleButton}"
+            Content="{Binding Path=Id}" />
                             <StackPanel
       Grid.Row="1"
       Margin="8 24 8 4">
                                 <TextBlock
         Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
         Margin="0" Text="{Binding loc.display_name}">
-      Location
+      
                                 </TextBlock>
                                 <TextBlock
         Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
         Margin="0" Text="{Binding dateTime}">
 
                                 </TextBlock>
-                                <Viewbox
-        Margin="0 4 0 8"
-        Height="16"
-        HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding loc}"></TextBlock>
-                                </Viewbox>
-                                <Viewbox
-        Margin="0 4 0 8"
-        Height="16"
-        HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Id}"></TextBlock>
-                                </Viewbox>
-                                <TextBlock
-        Style="{StaticResource MaterialDesignBody1TextBlock}"
-        TextWrapping="Wrap"
-        VerticalAlignment="Center">
-      After a gentle alien becomes stranded on Earth, the being is discovered and befriended by a young boy named Elliott.
-                                </TextBlock>
+                               
                             </StackPanel>
                             <Separator
       Grid.Row="2"
@@ -101,8 +85,8 @@
                                 <Button
         Style="{StaticResource MaterialDesignFlatButton}"
         HorizontalAlignment="Center"
-        Margin="8 4 8 8">
-                                    See full Reports
+        Margin="8 4 8 8" Click="Button_Click" DataContext="{Binding RealPlace.picture}">
+                                    See full Image
                                 </Button>
                             </StackPanel>
                         </Grid>

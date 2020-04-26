@@ -9,46 +9,47 @@
              d:DesignHeight="110" d:DesignWidth="300">
 
     <Grid>
-        <ItemsControl
+        <ScrollViewer>
+            <ItemsControl
             Name="item"
   ItemsSource="{Binding list}"
   Grid.IsSharedSizeScope="True">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate
       >
-                    <Border
+                        <Border
         x:Name="Border"
         Padding="8"
         BorderThickness="0 0 0 1"
         BorderBrush="{DynamicResource MaterialDesignDivider}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
               SharedSizeGroup="Checkerz" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <ToggleButton
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton
                                 Name ="mybtn"
             VerticalAlignment="Center"
             IsChecked="{Binding Path=IsAccurate}"
             Style="{StaticResource MaterialDesignActionLightToggleButton}"
             Content="{Binding Path=Id}" />
-                            <StackPanel
+                                <StackPanel
             Margin="8 0 0 0"
             Grid.Column="1">
-                                <TextBlock
+                                    <TextBlock
               FontWeight="Bold"
-              Text="{Binding Path=Id}" />
-                                <TextBlock
-              Text="{Binding Path=Id}" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <!--<DataGrid
+              Text="{Binding Path=dateTime}" />
+                                    <TextBlock
+              Text="{Binding Path=loc.display_name}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <!--<DataGrid
   Margin="0 8 0 0"
   ItemsSource="{Binding list}"
   CanUserSortColumns="True"
@@ -64,12 +65,16 @@
       Binding="{Binding Path=Id}"
       
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                --><!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn --><!--
+                -->
+            <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+            <!--
                 <materialDesign:DataGridTextColumn
       Binding="{Binding Path=dateTime}" 
                                 Header="Time"
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                --><!-- set a max length to get an indicator in the editor --><!--
+                -->
+            <!-- set a max length to get an indicator in the editor -->
+            <!--
                 <materialDesign:DataGridTextColumn
       Binding="{Binding Path=loc.display_name}" 
                                 Header="Location"
@@ -90,9 +95,12 @@
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
 
                 </materialDesign:DataGridTextColumn>
-                --><!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo --><!--
+                -->
+            <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+            <!--
                
             </DataGrid.Columns>
         </DataGrid>-->
+        </ScrollViewer>
     </Grid>
 </UserControl>

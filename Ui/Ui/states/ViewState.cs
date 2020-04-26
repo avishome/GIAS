@@ -22,7 +22,8 @@ namespace Ui
         NewReport,
         AnalizeData,
         Cluster,
-        Report
+        Report,
+        AllReports
     }
     public enum ViewTrigger
     {

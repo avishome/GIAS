@@ -257,5 +257,14 @@ namespace BLogic
                 }
             }
         }
+        public Cluster GetListReports()
+        {
+            using (var context = new DB14())
+            {
+                var addres = context.A.ToList();
+                var reports = context.R.ToList();
+                return new Cluster() { list = reports };
+            }
+        }
     }
 }

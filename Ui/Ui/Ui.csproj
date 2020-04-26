@@ -95,7 +95,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ImageView.xaml.cs">
+      <DependentUpon>ImageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="viewModel\analyzisViewModel.cs" />
+    <Compile Include="viewModel\linarChartViewModel.cs" />
     <Compile Include="viewModel\ListReportsViewModel.cs" />
     <Compile Include="views\Analysis.xaml.cs">
       <DependentUpon>Analysis.xaml</DependentUpon>
@@ -109,6 +113,9 @@
     </Compile>
     <Compile Include="Frame.xaml.cs">
       <DependentUpon>Frame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\linarChart.xaml.cs">
+      <DependentUpon>linarChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\ListOfCluster.xaml.cs">
       <DependentUpon>ListOfCluster.xaml</DependentUpon>
@@ -126,6 +133,10 @@
     <Compile Include="views\wellcome.xaml.cs">
       <DependentUpon>wellcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="ImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\Analysis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Frame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\linarChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

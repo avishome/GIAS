@@ -1,7 +1,6 @@
-﻿using Entities;
+﻿using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,26 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ui.viewModel;
 
-namespace Ui
+namespace Ui.views
 {
     /// <summary>
-    /// Interaction logic for ReportTab.xaml
+    /// Interaction logic for linarChart.xaml
     /// </summary>
-    public partial class ReportTab : UserControl
+    public partial class linarChart : UserControl
     {
-        public ReportTab()
+        public linarChartViewModel Vm { get; set; }
+
+        public linarChart(BLogic.DataManager d)
         {
+            Vm = new linarChartViewModel(d);
             InitializeComponent();
-
-            //DataContext = items;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show(((Button)e.Source).DataContext.ToString());
-
-
+            DataContext = Vm;
+           
         }
     }
 }

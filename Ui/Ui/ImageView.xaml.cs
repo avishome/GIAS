@@ -1,7 +1,5 @@
-﻿using Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,28 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Ui
 {
     /// <summary>
-    /// Interaction logic for ReportTab.xaml
+    /// Interaction logic for ImageView.xaml
     /// </summary>
-    public partial class ReportTab : UserControl
+    public partial class ImageView : Window
     {
-        public ReportTab()
+        public string imageUrl { get; set; }
+        public ImageView(string imgUrl)
         {
+            imageUrl = imgUrl;
             InitializeComponent();
-
-            //DataContext = items;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show(((Button)e.Source).DataContext.ToString());
-
-
+            DataContext = this;
         }
     }
 }

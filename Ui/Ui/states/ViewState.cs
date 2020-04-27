@@ -45,6 +45,7 @@ namespace Ui
         SendReport,
         SelectPlaceOnMap,
         AnalizeData,
+        ImageView,
         back
     }
 

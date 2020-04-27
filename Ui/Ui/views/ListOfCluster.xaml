@@ -32,12 +32,12 @@
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                 <!-- set a max length to get an indicator in the editor -->
                 <materialDesign:DataGridTextColumn
-      Binding="{Binding Path=RealPlace.loc.display_name}" 
+      Binding="{Binding RealPlace.loc.display_name}" 
                                 Header="Location"
       MaxLength="255"
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
                 <materialDesign:DataGridTextColumn
-      Binding="{Binding Path=RealPlace.dateTime}" 
+      Binding="{Binding RealPlace.dateTime}" 
                                 Header="dateTime"
       EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
 

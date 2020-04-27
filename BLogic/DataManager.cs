@@ -21,7 +21,7 @@ namespace BLogic
             int f = 0;
             foreach (Cluster c in List) {
                 CalcAvgLoc(c);
-                c.RealPlace = c.list.FirstOrDefault();
+                //c.RealPlace = c.list.FirstOrDefault();
                 if (DistanceTo(double.Parse(c.RealPlace.p1), double.Parse(c.RealPlace.p2),
                     double.Parse(c.AdrressByAlgo.p1), double.Parse(c.AdrressByAlgo.p2)) > v)
                     f++;
@@ -59,19 +59,29 @@ namespace BLogic
 
         public List<Cluster> List { get
             {
-                if(list == null)
-                    using (var context = new DB14())
-                    {
-                        list = context.C.ToList();
-
-                        foreach (Cluster c in List)
-                        {
-                            c.list = context.R.Where(l => l.ClusterId == c.Id).ToList();
-                        }
-                    }
+                if (list == null)
+                    NewMethod();
                 return list;
             }
                     set { list = value; } }
+
+        private void NewMethod()
+        {
+            using (var context = new DB14())
+            {
+                list = context.C.ToList();
+                //var temp2 = context.A.ToList();
+                foreach (Cluster c in list)
+                {
+
+                    c.list = context.R.Where(l => l.ClusterId == c.Id).ToList();
+                    Report def = c.list.FirstOrDefault();
+                    Report gooddef = context.R.Where(l => l.ClusterId == c.Id && (l.pic != "" && l.pic != null)).FirstOrDefault();
+                    c.RealPlace = (gooddef != null) ? gooddef : def;
+                }
+            }
+        }
+
         public List<Report> Point { get {
                 List<Report> temp = new List<Report>();
                 foreach (Cluster i in List) 
@@ -83,6 +93,11 @@ namespace BLogic
         public DataManager(Log log)
         {
             this.log = log;
+        }
+
+        public void addReport(Report report)
+        {
+            Catalog(new Cluster(report));
         }
 
         public async Task InputFromUrl(string url)

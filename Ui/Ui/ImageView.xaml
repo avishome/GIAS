@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel>
             <Image
-      Source="{Binding imageUrl}"
+      Source="{Binding}"
       Stretch="UniformToFill" />
         </StackPanel>
     </Grid>

@@ -9,7 +9,9 @@ namespace Dl
     public class DB14 : DbContext
     {
         //Data Source=http://35.184.140.193;Initial Catalog=iconic-exchange-226008:us-central1:giasdb;Persist Security Info=True;User ID=sqlserver;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False
-        public DB14(): base(){
+        private const string ConnetionString = "Server=database-2.camdfqht0pg9.us-east-1.rds.amazonaws.com;Database=myDataBase;User Id=admin;Password=33QLnKrhhk7Ubwr;";
+        public DB14(): base(ConnetionString)
+        {
             
         }
         /*protected override void OnModelCreating(DbModelBuilder modelBuilder)

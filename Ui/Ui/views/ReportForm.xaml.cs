@@ -23,9 +23,10 @@ namespace Ui
     public partial class ReportForm : UserControl
     {
         public ReportFormViewModel s;
-        public ReportForm(LogEvent l, Machine machine)
+        
+        public ReportForm(LogEvent l, Machine machine, BLogic.DataManager d)
         {
-            s = new ReportFormViewModel(l,machine);
+            s = new ReportFormViewModel(l,machine,d);
             DataContext = s;
             InitializeComponent();
         }
@@ -36,6 +37,11 @@ namespace Ui
             if (openFileDialog.ShowDialog() == true) {
                 s.file = openFileDialog.FileName;
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

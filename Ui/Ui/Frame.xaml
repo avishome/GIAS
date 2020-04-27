@@ -77,6 +77,16 @@
       Kind="Twitter"></materialDesign:PackIcon>
                                 </materialDesign:Chip.Icon>
                             </materialDesign:Chip>
+                            <materialDesign:Chip Margin="4"
+  Content="Refresh Data"
+  IconBackground="{DynamicResource PrimaryHueDarkBrush}"
+  IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                                 Command="{Binding NewReport}">
+                                <materialDesign:Chip.Icon>
+                                    <materialDesign:PackIcon
+      Kind="Twitter"></materialDesign:PackIcon>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
                         </StackPanel>
                     </materialDesign:PopupBox>
                     
@@ -116,13 +126,13 @@
                 </Grid.RowDefinitions>
 
 
-                <GroupBox x:Name="LeftBox" Grid.Column="0" Grid.Row="0"
-  Header="LastReports"
+                <GroupBox x:Name="LeftBox" Content="{Binding leftTab}" Grid.Column="0" Grid.Row="0"
+  Header="{Binding leftTitle}"
   Margin="16">
                     <!--<local:listOfReports />-->
                 </GroupBox>
-                <GroupBox x:Name="RightBox" Grid.Column="1" Grid.Row="0"
-  Header="Reports On Map"
+                <GroupBox x:Name="RightBox" Content="{Binding rightTab}" Grid.Column="1" Grid.Row="0"
+  Header="{Binding rightTitle}"
   Margin="16">
                     <!--<local:ReportsInMap />-->
                 </GroupBox>
@@ -153,9 +163,7 @@
                             Grid.Column="1"
                             Name="console"
       VerticalAlignment="Center"
-      Margin="16,8,0,8" Height="16">
-                        
-    Console log
+      Margin="16,8,0,8" Height="16" Text="{Binding TitleConsole}">
                         </TextBlock>
                         <StackPanel Grid.Column="2"
   Orientation="Horizontal" 
@@ -284,8 +292,8 @@
                 <ScrollViewer MaxHeight="400">
                 <TextBlock
         Margin="4"
-        VerticalAlignment="Center" Name="fullLog">
-                Full Log Here
+        VerticalAlignment="Center" Name="fullLog" Text="{Binding logConsole}">
+                
                 </TextBlock>
                 </ScrollViewer>
 

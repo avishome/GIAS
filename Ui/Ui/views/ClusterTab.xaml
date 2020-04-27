@@ -62,7 +62,7 @@
         Margin="0 4 0 8"
         Height="16"
         HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding RealPlace.loc.toString}"></TextBlock>
+                                    <TextBlock Text="{Binding RealPlace.loc.display_name}"></TextBlock>
                                 </Viewbox>
                                 <Viewbox
         Margin="0 4 0 8"

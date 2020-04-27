@@ -15,17 +15,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="101*"/>
-            <RowDefinition Height="67*"/>
-            <RowDefinition Height="76*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-        </Grid.RowDefinitions>
+        <StackPanel>
         <TextBox
             Text="{Binding val, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            Height="40px"
             x:Name="NameTextBox"
             materialDesign:HintAssist.Hint="Location auto complit" Margin="0,18,0,0" VerticalAlignment="Top" Grid.RowSpan="2"
             >
@@ -40,24 +32,18 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Row="5"
-              Orientation="Vertical">
-            <DatePicker
-  Width="100"
-  materialDesign:HintAssist.Hint="Pick Date"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-            <materialDesign:TimePicker
-          materialDesign:HintAssist.Hint="With Seconds"
-         
-          x:Name="WithSecondsTimePicker"
-          WithSeconds="True"
-          Width="100" />
-        </StackPanel>
-
-
-
-        <ToggleButton Grid.Row="2"
-      Style="{StaticResource MaterialDesignFlatToggleButton}"
+        <StackPanel Orientation="Vertical">
+            <DatePicker materialDesign:HintAssist.Hint="Pick Date"
+                        SelectedDate="{Binding date}"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                <TextBox Grid.Row="3" Text="{Binding time}"
+      materialDesign:HintAssist.Hint="12:20:37"
+       />
+            </StackPanel>
+            <TextBox Grid.Row="3"
+      materialDesign:HintAssist.Hint="Your Mail"
+       />
+            <ToggleButton Grid.Row="2" Style="{StaticResource MaterialDesignFlatToggleButton}"
       ToolTip="MaterialDesignFlatToggleButton" Click="Button_Click" Height="Auto" Margin="380,17,380,18" Width="Auto">
             <materialDesign:PackIcon
         Kind="Paperclip"
@@ -68,16 +54,13 @@
 
 
 
-        <TextBox Grid.Row="3"
-      x:Name="location"
-      materialDesign:HintAssist.Hint="Name"
-      materialDesign:HintAssist.HelperText="Helper text longer than error" Margin="0,17,0,32"/>
+        
 
-        <Button Grid.Row="4"
-  Style="{StaticResource MaterialDesignFloatingActionButton}"
-  materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-  materialDesign:ButtonProgressAssist.Value="-1"
-  materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-  Content="{materialDesign:PackIcon DotsHorizontal}" Height="Auto" Margin="372,10,372,9" Width="Auto"  />
+        <Button Grid.Row="4" Style="{StaticResource MaterialDesignFloatingActionButton}"
+          materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+          materialDesign:ButtonProgressAssist.Value="-1"
+          materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+          Content="{materialDesign:PackIcon DotsHorizontal}" Command="{Binding send}"  />
+        </StackPanel>
     </Grid>
 </UserControl>

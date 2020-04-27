@@ -19,10 +19,8 @@ namespace Ui
     /// </summary>
     public partial class ImageView : Window
     {
-        public string imageUrl { get; set; }
-        public ImageView(string imgUrl)
+        public ImageView()
         {
-            imageUrl = imgUrl;
             InitializeComponent();
             DataContext = this;
         }

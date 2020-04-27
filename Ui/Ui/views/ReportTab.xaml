@@ -18,22 +18,6 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <!--<StackPanel>
-                    <Image Height="100" Source="https://www.wpf-tutorial.com/Images/ArticleImages/1/chapters/panels/stackpanel_vertical_simple.png" />
-                    <DockPanel DockPanel.Dock="Top">
-                            <TextBlock HorizontalAlignment="center" Text="{Binding Id}"></TextBlock>
-                    </DockPanel>
-                    <DockPanel DockPanel.Dock="Top">
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding dateTime}"></TextBlock>
-                    </DockPanel>
-                    <DockPanel DockPanel.Dock="Top">
-                            <TextBlock HorizontalAlignment="center" Text="{Binding loc}"></TextBlock>
-                    </DockPanel>
-                    <DockPanel DockPanel.Dock="Top">
-                            <TextBlock HorizontalAlignment="Left" >owner</TextBlock>
-                        <TextBlock HorizontalAlignment="Right">closer</TextBlock>
-                    </DockPanel>
-                </StackPanel>-->
                     <materialDesign:Card
   Width="220">
                         <Grid>
@@ -87,7 +71,7 @@
                                 <Button
         Style="{StaticResource MaterialDesignFlatButton}"
         HorizontalAlignment="Center"
-        Margin="8 4 8 8" Command="{Binding openImg, ElementName=uc}" CommandParameter="{Binding picture}">
+        Margin="8 4 8 8" Command="{Binding DataContext.openImg, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding picture}">
                                     See full Image
                                 </Button>
                             </StackPanel>

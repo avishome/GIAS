@@ -107,6 +107,7 @@
     <Compile Include="viewModel\analyzisViewModel.cs" />
     <Compile Include="viewModel\FrameViewModel.cs" />
     <Compile Include="viewModel\linarChartViewModel.cs" />
+    <Compile Include="viewModel\reportTabViewModel.cs" />
     <Compile Include="views\Analysis.xaml.cs">
       <DependentUpon>Analysis.xaml</DependentUpon>
     </Compile>

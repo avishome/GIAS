@@ -8,6 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <m:Map x:Name="myMap" CredentialsProvider="EI3gijV1rzgNCN9nADxn~mugYRXtpRQGxIt7ovRjYLg~AtHkyBHLtpPgY3tAJ4V-_htCwinXGTgWsXtISGqvHqqXrPFITNxtULBc0lL93acR" Mode="AerialWithLabels" Center="37.806029,-122.407007" ZoomLevel="3" />
+        <m:Map x:Name="myMap" CredentialsProvider="EI3gijV1rzgNCN9nADxn~mugYRXtpRQGxIt7ovRjYLg~AtHkyBHLtpPgY3tAJ4V-_htCwinXGTgWsXtISGqvHqqXrPFITNxtULBc0lL93acR" Mode="AerialWithLabels" Center="37.806029,-122.407007" ZoomLevel="10">
+
+        </m:Map>
     </Grid>
 </UserControl>

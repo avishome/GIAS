@@ -1,5 +1,6 @@
 ﻿using BLogic;
 using LogClass;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,12 @@ namespace Ui.viewModel
         string _TitleConsole;
         public string TitleConsole { get { return _TitleConsole; } set { _TitleConsole = value; OnPropertyRaised("TitleConsole"); } }
         string _logConsole;
+
+        internal void command(ViewTrigger trigger)
+        {
+            Machine.Fire(trigger);
+        }
+
         public string logConsole { get { return _logConsole; } set { _logConsole = value; OnPropertyRaised("logConsole"); } }
         string _rightTitle;
         public string rightTitle { get { return _rightTitle; } set { _rightTitle = value; OnPropertyRaised("rightTitle"); } }
@@ -31,6 +38,7 @@ namespace Ui.viewModel
         public ICommand Analitics { get; set; }
         public ICommand Back { get; set; }
         public ICommand Cluster { get; set; }
+        public ICommand Refresh { get; set; }
 
         public ViewTrigger options = ViewTrigger.Combina; // set your default value here
 
@@ -54,7 +62,7 @@ namespace Ui.viewModel
             stateConfigure(Machine, D);
 
             loge = log.LogMessege("log working:)", true);
-            eventConnect();
+            eventConnect(D);
             D.InputFromUrl(GlobFuncs.getConfig("dataUrl"));
             D.viewData();
         }
@@ -104,17 +112,16 @@ namespace Ui.viewModel
             }
             leftTab = Rf;
         }
-        private void eventConnect()
+        private void eventConnect(DataManager d)
         {
             NewReport = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.NewReport);
             Analitics = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.AnalizeData);
             Back = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.back);
             Cluster = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.ClusterCombina);
-            /*switch1.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.Map));
-            switch2.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.Tab));
-            switch3.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.List));
-            switch4.Checked += new RoutedEventHandler((Object x, RoutedEventArgs y) => Machine.Fire(ViewTrigger.back));
-            */
+            Refresh = new DelegateCommand<string>(
+                     (string r) => { d.refreshLocalFromDB(); }
+             );
+
         }
         private void OnTransitionAction(Machine.Transition transition)
         {

@@ -60,12 +60,12 @@ namespace BLogic
         public List<Cluster> List { get
             {
                 if (list == null)
-                    NewMethod();
+                    refreshLocalFromDB();
                 return list;
             }
                     set { list = value; } }
 
-        private void NewMethod()
+        public void refreshLocalFromDB()
         {
             using (var context = new DB14())
             {

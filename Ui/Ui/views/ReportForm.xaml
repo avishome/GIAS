@@ -43,8 +43,8 @@
             <TextBox Grid.Row="3"
       materialDesign:HintAssist.Hint="Your Mail"
        />
-            <ToggleButton Grid.Row="2" Style="{StaticResource MaterialDesignFlatToggleButton}"
-      ToolTip="MaterialDesignFlatToggleButton" Click="Button_Click" Height="Auto" Margin="380,17,380,18" Width="Auto">
+            <ToggleButton Grid.Row="2" IsChecked="{Binding hasFile}" Style="{StaticResource MaterialDesignFlatToggleButton}"
+      ToolTip="add file" Command="{Binding addpic}" Height="30" Width="30">
             <materialDesign:PackIcon
         Kind="Paperclip"
         Height="21"

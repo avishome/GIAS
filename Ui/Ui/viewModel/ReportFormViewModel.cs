@@ -12,28 +12,23 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MetadataExtractor;
+using MetadataExtractor.Formats.Exif;
+using Microsoft.Win32;
+using System.ComponentModel;
 
 namespace Ui
 {
-    public class ReportFormViewModel
+    public class ReportFormViewModel : INotifyPropertyChanged
     {
-        /*pubilc void postr()
+        private void OnPropertyRaised(string property)
         {
-            HttpClient c = new HttpClient();
-            if (this.file != "") {
-                System.IO.FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
-                byte[] data = new byte[fs.Length];
-                fs.Read(data, 0 , data.Length);
-                fs.Close();
-            }
-            var values = new Dictionary<string, object>
+            if (PropertyChanged != null)
             {
-                
-            };
-            var content = new FormUrlEncodedContent(values);
-            var response = await c.PostAsync("", content);
-            var responseString = await response.Content.ReadAsStringAsync();
-        }*/
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+        
         public OnlineStreem internet;
         LogEvent log;
         dynamic Selectplace;
@@ -42,11 +37,17 @@ namespace Ui
         public ObservableCollection<String> Suggests { get; set; }
         private string _val;
         internal string file;
+        GeoLocation location;
+        public bool hasFile { get { return location != null; }  set { } }
         public DateTime date { get; set; }
         public string time { get; set; }
         public ICommand send { get; set; }
+        public ICommand addpic { get; set; }
         Machine machine;
         DataManager d;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string val { 
             get { return _val; }
             set { if (_val != value) { _val = value; this.UpdateSuggests(val); } }
@@ -64,9 +65,29 @@ namespace Ui
                      () => insert(),
                      () => { log.LogMessege("check", true);  return true; }
                      );
-            
+            addpic = new DelegateCommand(
+                     () => takePic(),
+                     () => { return true; }
+                     );
         }
+        public void takePic() {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                file = openFileDialog.FileName;
+                try
+                {
+                    var gps = ImageMetadataReader.ReadMetadata(file)
+                                 .OfType<GpsDirectory>()
+                                 .FirstOrDefault();
+                    location = gps.GetGeoLocation();
+                    OnPropertyRaised("hasFile");
+                    log.LogMessege(String.Format("Image at {0},{1}", location.Latitude, location.Longitude), true);
+                }
+                catch (Exception e) { log.LogMessege(e.Message, true); return; }
 
+            }
+        }
         private void insert()
         {
             DateTime e;
@@ -80,12 +101,18 @@ namespace Ui
             log.LogMessege(d.ToString(),true);
             
             this.Selectplace = internet.getLocData(0);
-
-            if (Selectplace != null)
+            if (location != null)
             {
-                var report = new Entities.Report(Guid.NewGuid().ToString("N"), d, new string[2] { Selectplace["lat"], Selectplace["lon"] },"");
+                var report = new Entities.Report(Guid.NewGuid().ToString("N"), d, new string[2] { location.Latitude.ToString(), location.Longitude.ToString() }, "");
                 this.d.addReport(report);
             }
+            else if (Selectplace != null)
+            {
+                var report = new Entities.Report(Guid.NewGuid().ToString("N"), d, new string[2] { Selectplace["lat"], Selectplace["lon"] }, "");
+                this.d.addReport(report);
+            }
+            else
+                log.LogMessege("no place...", true);
         }
         public void logfunc(string str) { log.LogMessege(str,true); }
         private async void UpdateSuggests(string q)

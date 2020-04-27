@@ -24,48 +24,48 @@ namespace Ui
     /// </summary>
     public partial class Frame : Window
     {
+        FrameViewModel M;
         public Frame()
         {
-
-
             InitializeComponent();
-            DataContext = new FrameViewModel() ;        
+            M = new FrameViewModel();
+            DataContext = M;       
         }
  
 
         private void Chip_Click(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.AnalizeData);
+            M.command(ViewTrigger.AnalizeData);
         }
 
         private void xyz_Click(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.NewReport);
+            M.command(ViewTrigger.NewReport);
         }
 
         private void Chip_Click_1(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.back);
+            M.command(ViewTrigger.back);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.ClusterCombina);
+            M.command(ViewTrigger.ClusterCombina);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.back);
+            M.command(ViewTrigger.back);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.NewReport);
+            M.command(ViewTrigger.NewReport);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            //Machine.Fire(ViewTrigger.AnalizeData);
+            M.command(ViewTrigger.AnalizeData);
         }
     }
     }

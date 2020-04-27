@@ -31,17 +31,7 @@ namespace Ui
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true) {
-                s.file = openFileDialog.FileName;
-            }
-        }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
     }
 }

@@ -81,7 +81,7 @@
   Content="Refresh Data"
   IconBackground="{DynamicResource PrimaryHueDarkBrush}"
   IconForeground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                                                 Command="{Binding NewReport}">
+                                                 Command="{Binding Refresh}">
                                 <materialDesign:Chip.Icon>
                                     <materialDesign:PackIcon
       Kind="Twitter"></materialDesign:PackIcon>

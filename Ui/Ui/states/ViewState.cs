@@ -46,7 +46,8 @@ namespace Ui
         SelectPlaceOnMap,
         AnalizeData,
         ImageView,
-        back
+        back,
+        AllReports
     }
 
     

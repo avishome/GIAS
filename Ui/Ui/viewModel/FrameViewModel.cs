@@ -39,6 +39,9 @@ namespace Ui.viewModel
         public ICommand Back { get; set; }
         public ICommand Cluster { get; set; }
         public ICommand Refresh { get; set; }
+        public ICommand AllReport { get; set; }
+        public ICommand Save { get; set; }
+
 
         public ViewTrigger options = ViewTrigger.Combina; // set your default value here
 
@@ -93,10 +96,10 @@ namespace Ui.viewModel
 
         private void AutoComplitTreament(Machine Machine, DataManager d)
         {
+            var t = new ReportsInMap();
             if (Rf is null) Rf = new ReportForm(loge, Machine, d);
             else
             {
-                var t = new ReportsInMap();
                 List<Entities.Report> q = new List<Entities.Report>();
                 if (!(Rf.s.internet.data is null))
                     foreach (var i in Rf.s.internet.data)
@@ -107,9 +110,9 @@ namespace Ui.viewModel
                             p2 = ((dynamic)i)["lon"]
                         });
                     };
-                t.DataContext2 = q;
-                rightTab = t;
+                t.DataContext2 = q;  
             }
+            rightTab = t;
             leftTab = Rf;
         }
         private void eventConnect(DataManager d)
@@ -118,8 +121,12 @@ namespace Ui.viewModel
             Analitics = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.AnalizeData);
             Back = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.back);
             Cluster = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.ClusterCombina);
+            AllReport = StateMachineCommandEx.CreateCommand(Machine, ViewTrigger.AllReports);
             Refresh = new DelegateCommand<string>(
                      (string r) => { d.refreshLocalFromDB(); }
+             );
+            Save = new DelegateCommand<string>(
+                     (string r) => { d.Save(); }
              );
 
         }

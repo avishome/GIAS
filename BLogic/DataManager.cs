@@ -70,23 +70,21 @@ namespace BLogic
             using (var context = new DB14())
             {
                 list = context.C.ToList();
-                //var temp2 = context.A.ToList();
+                var temp2 = context.A.ToList();
                 foreach (Cluster c in list)
                 {
-
                     c.list = context.R.Where(l => l.ClusterId == c.Id).ToList();
-                    Report def = c.list.FirstOrDefault();
-                    Report gooddef = context.R.Where(l => l.ClusterId == c.Id && (l.pic != "" && l.pic != null)).FirstOrDefault();
-                    c.RealPlace = (gooddef != null) ? gooddef : def;
                 }
             }
         }
 
         public List<Report> Point { get {
                 List<Report> temp = new List<Report>();
-                foreach (Cluster i in List) 
-                    if(!(i.FirstOrDefault() is null && i.size()<2))temp.Add(i.FirstOrDefault()); 
-                    else if(!(i.AdrressByAlgo is null)) temp.Add(i.AdrressByAlgo);
+                foreach (Cluster i in List)
+                    if (i.AdrressByAlgo != null)
+                        temp.Add(i.AdrressByAlgo);
+                    else
+                        temp.Add(i.RealPlace);
                 return temp;
             } }
 

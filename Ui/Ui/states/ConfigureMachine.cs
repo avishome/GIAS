@@ -25,8 +25,7 @@ namespace Ui
 
             // Refund money
             this.Configure(ViewState.ClusterView)
-                .OnEntry(() => { Console.Write("view cluter"); })
-                .Permit(ViewTrigger.back, ViewState.Cluster);
+                .OnEntry(() => { Console.Write("view cluter"); });
 
             this.Configure(ViewState.Cluster)
                 .OnEntry(() => { Console.Write("cluter"); })
@@ -37,7 +36,8 @@ namespace Ui
                 .Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData)
                 .Permit(ViewTrigger.NewReport,ViewState.NewReport)
                 .Permit(ViewTrigger.ShowReports,ViewState.ReportTabs)
-                .Permit(ViewTrigger.back, ViewState.AllReports);
+                .Permit(ViewTrigger.back, ViewState.AllReports)
+                .Permit(ViewTrigger.AllReports, ViewState.AllReports);
 
             this.Configure(ViewState.AnalizeData).OnEntry(()=> { Console.Write("analize"); })
                 .SubstateOf(ViewState.Cluster);
@@ -62,18 +62,17 @@ namespace Ui
             // CanSelectCoffee
             this.Configure(ViewState.Report)
                 .OnEntry(() => { Console.Write("Report"); })
-                .Permit(ViewTrigger.Combina, ViewState.ReportCombina)
+                .Permit(ViewTrigger.back, ViewState.ClusterCombina)
                 .Permit(ViewTrigger.List, ViewState.ReportList)
                 .Permit(ViewTrigger.Map, ViewState.ReportMap)
                 .Permit(ViewTrigger.Tab, ViewState.ReportTabs)
                 .Permit(ViewTrigger.AnalizeData, ViewState.AnalizeData)
                 .Permit(ViewTrigger.NewReport, ViewState.NewReport)
                 .Permit(ViewTrigger.ShowReports, ViewState.ReportTabs)
-                .Permit(ViewTrigger.back, ViewState.AllReports);
+                .Permit(ViewTrigger.AllReports, ViewState.AllReports);
 
             this.Configure(ViewState.AllReports)
                .OnEntry(() => { Console.Write("all report"); })
-               .Permit(ViewTrigger.ClusterCombina, ViewState.ClusterCombina)
                .SubstateOf(ViewState.Report);
 
             this.Configure(ViewState.NewReport)

@@ -19,7 +19,15 @@ namespace Entities
         public Report AdrressByAlgo { get; set; }
         public int Length { get { return list.Count(); } set { } }
         [NotMapped]
-        public Report RealPlace { get { foreach (Report r in list) if (!(r.pic is null) && (r.pic != "")) return r; return RealAdress; } set { RealAdress = value; } }
+        public Report RealPlace { get { 
+                Report secendOp = null; 
+                foreach (Report r in list) { 
+                    if (r.IsAccurate) return r; 
+                    if (!(r.pic is null) && (r.pic != "")) secendOp = r; 
+                } 
+                if (secendOp != null) return secendOp; 
+                    else return list.First();  } 
+             }
         public Cluster(Report report)
         {
             list = new LinkedList<Report>();

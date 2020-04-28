@@ -50,7 +50,7 @@ namespace Ui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            M.command(ViewTrigger.ClusterCombina);
+            M.command(ViewTrigger.back);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

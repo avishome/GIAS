@@ -1,88 +1,40 @@
-﻿<UserControl x:Class="Ui.ClusterTab"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Ui"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl x:Class="Ui.ClusterTab" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local="clr-namespace:Ui" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ListBox Name="lbTodoList" ItemsSource="{Binding}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
+                    <WrapPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-
-                    <materialDesign:Card
-  Width="Auto">
+                    <materialDesign:Card Width="Auto">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition
-        Height="140" />
-                                <RowDefinition
-        Height="*" />
-                                <RowDefinition
-        Height="Auto" />
-                                <RowDefinition
-        Height="Auto" />
-                                <RowDefinition
-        Height="Auto" />
-                                <RowDefinition
-        Height="Auto" />
+                                <RowDefinition Height="140" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Image
-      Source="{Binding RealPlace.picture}"
-      Height="140"
-      Stretch="UniformToFill" />
-                            <Button
-      Grid.Row="0"
-      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Bottom"
-      Margin="0 0 16 -20" Click="Button_Click">
+                            <Image Source="{Binding RealPlace.picture}" Height="140" Stretch="UniformToFill" />
+                            <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 16 -20" Click="Button_Click">
                                 <TextBlock Text="{Binding Length}"></TextBlock>
                             </Button>
-                            <StackPanel
-      Grid.Row="1"
-      Margin="8 24 8 4">
-                                <TextBlock
-        Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-        Margin="0" Text="{Binding RealPlace.loc.display_name}">
-                                </TextBlock>
-                                <TextBlock
-        Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-        Margin="0" Text="{Binding RealPlace.dateTime}">
-
-                                </TextBlock>
-                                <Viewbox
-        Margin="0 4 0 8"
-        Height="16"
-        HorizontalAlignment="Left">
+                            <StackPanel Grid.Row="1" Margin="8 24 8 4">
+                                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0" Text="{Binding RealPlace.loc.display_name}"></TextBlock>
+                                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Margin="0" Text="{Binding RealPlace.dateTime}"></TextBlock>
+                                <Viewbox Margin="0 4 0 8" Height="16" HorizontalAlignment="Left">
                                     <TextBlock></TextBlock>
                                 </Viewbox>
-                                <Viewbox
-        Margin="0 4 0 8"
-        Height="16"
-        HorizontalAlignment="Left">
+                                <Viewbox Margin="0 4 0 8" Height="16" HorizontalAlignment="Left">
                                     <TextBlock Text="{Binding Id}"></TextBlock>
                                 </Viewbox>
-
                             </StackPanel>
-                            <Separator
-      Grid.Row="2"
-      Style="{StaticResource MaterialDesignDarkSeparator}"
-      Margin="8 0 8 0" />
+                            <Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="8 0 8 0" />
                             <StackPanel Grid.Row="5">
-                                <Button
-                                    DataContext="{Binding}"
-                                    Click="Button_Click"
-        Style="{StaticResource MaterialDesignFlatButton}"
-        HorizontalAlignment="Center"
-        Margin="8 4 8 8">
+                                <Button DataContext="{Binding}" Click="Button_Click" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Center" Margin="8 4 8 8">
                                     See full Reports
                                 </Button>
                             </StackPanel>
@@ -91,6 +43,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </Grid>
 </UserControl>

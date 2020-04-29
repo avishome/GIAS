@@ -21,12 +21,6 @@ namespace Ui.viewModel
         string _TitleConsole;
         public string TitleConsole { get { return _TitleConsole; } set { _TitleConsole = value; OnPropertyRaised("TitleConsole"); } }
         string _logConsole;
-
-        internal void command(ViewTrigger trigger)
-        {
-            Machine.Fire(trigger);
-        }
-
         public string logConsole { get { return _logConsole; } set { _logConsole = value; OnPropertyRaised("logConsole"); } }
         string _rightTitle;
         public string rightTitle { get { return _rightTitle; } set { _rightTitle = value; OnPropertyRaised("rightTitle"); } }
@@ -133,6 +127,11 @@ namespace Ui.viewModel
         private void OnTransitionAction(Machine.Transition transition)
         {
             TitleConsole = String.Format("Transition from {0} to {1}, trigger = {2}.", transition.Source, transition.Destination, transition.Trigger);
+        }
+        
+        internal void command(ViewTrigger trigger)
+        {
+            Machine.Fire(trigger);
         }
 
         public void MainStatus(LogEvent subLog)

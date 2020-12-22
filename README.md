@@ -18,3 +18,7 @@ example web client for upload - https://avishome.github.io/%D7%98%D7%95%D7%A4%D7
   - location detect from picture by EXIF.
   - real time acsess to program logs.
   - data store on cloud sql server
+
+<img src="Picture1.png" alt="drawing" width="500"/>
+<img src="Picture2.png" alt="drawing" width="500"/>
+<img src="Picture3.png" alt="drawing" width="500"/>
